@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const User = require("../../models/user")
-const Channel = require("../../models/channel")
+const User = require("../../models/user");
+const Channel = require("../../models/channel");
+const UserId = require("../../models/userId");
 
 import { generateUserId } from "../../config/constants.config";
 
@@ -23,7 +24,9 @@ export default class widgetAuthController {
                     if(!err && isChannelExists) {
                         const token = jwt.sign( { privateKey, channelId }, AUTH_SECRET );
                         const userId = generateUserId();
-                        res.send({ status : true, token, userId });
+                        UserId.saveUserId({ userId, privateKey, channelId }, (err:any, savedUserInfo:any) => {
+                            Boolean(err) ? res.status(500).send({ status : false, message : "error with the query"}) : res.send({ status : true, token, userId });
+                        });
                     } else if ( !isChannelExists ) {
                         res.status(400).send({ status : false, message : "UnAuthenticated channelId" });
                     } else {

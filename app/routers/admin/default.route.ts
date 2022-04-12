@@ -5,7 +5,7 @@ var router = express.Router();
 
 const AdminDefaultController = new adminDefaultController()
 
-// /api/default/
+// /admin-api/default/
 router.route('/')
     .get(AdminDefaultController.index)
 

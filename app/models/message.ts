@@ -5,6 +5,7 @@ const messageSchema = new Schema({
     messageFormat: { type: String, required : true }, // poll, text, images, file, etc
     privateKey : { type: String, required : true },
     channelId: { type: String, required : true },
+    userId: { type: String },
     isDeleted: { type: Boolean, default : false },
     description: { type: String },
     data: { type: Schema.Types.Mixed }
@@ -12,8 +13,8 @@ const messageSchema = new Schema({
 
 messageSchema.statics = {
     saveMessage : function (inputs: any, callback:Function) {
-        const { messageType, messageFormat, privateKey, channelId, isDeleted, description, data } = inputs;
-        const Message = new this({ messageType, messageFormat, privateKey, channelId, isDeleted, description, data });
+        const { messageType, messageFormat, privateKey, channelId, userId, isDeleted, description, data } = inputs;
+        const Message = new this({ messageType, messageFormat, privateKey, channelId, userId, isDeleted, description, data });
         return Message.save().then((message:any) => {
             return callback(null, message);
         }).catch((err:any) => {

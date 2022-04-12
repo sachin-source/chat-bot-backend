@@ -13,10 +13,9 @@ export default class adminLoginController {
             User.comparePassword(password, user.password, (err: any, matched: any) => {
                 if (err || !matched) return res.status(401).send({ err: true, message: "Invalid password." });
 
-                const { username, privateKey, role } = user;
-                var token = jwt.sign({ email, username, privateKey, role }, jwtSecret);
-                // var decoded = jwt.verify(token, jwtSecret, { complete: true });
-                res.send({ token, err: false, email, username, privateKey, role });
+                const { username, privateKey, role, channelId } = user;
+                var adminToken = jwt.sign({ email, username, privateKey, role, channelId }, jwtSecret);
+                res.send({ adminToken, err: false, email, username, privateKey, role, channelId });
             });
         });
     }
@@ -26,8 +25,8 @@ export default class adminLoginController {
      * So keeping private
      */
     public index = (req: any, res: any) => {
-        const { password, username, email } = req.query;
-        const user = new User({ username, password, email });
+        const { password, username, email, channelId } = req.query;
+        const user = new User({ username, password, email, channelId });
         user.save().then((result: any) => {
             res.send({ err:false, result })
         }).catch((err: any) => {

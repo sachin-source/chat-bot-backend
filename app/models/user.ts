@@ -9,6 +9,7 @@ const UserSchema : typeof mongoose.Schema = new mongoose.Schema({
     password: { type: String },
     privateKey: { type: String, default: generateRandomString(), unique: true },
     role: { type: String, enum : ["admin", "superAdmin", "supportAgent"], default : "superAdmin" },
+    channelId: { type: String },
 },{ timestamps: true });
 
 UserSchema.pre("save", function (this: typeof UserSchema, next: Function) {
