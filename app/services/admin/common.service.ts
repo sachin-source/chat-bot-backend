@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-import { jwtSecret } from "../../config/constants.config"
+import { loginJwtSecret } from "../../config/constants.config"
 
 const  authenticate = (req:any, res:any, next:Function) => {
 
@@ -23,7 +23,7 @@ const  authenticate = (req:any, res:any, next:Function) => {
     }
 
     const tokenVerification = (token:any) => {
-        jwt.verify(token, jwtSecret, { complete: true }, (err:any, userInfo:any) => {
+        jwt.verify(token, loginJwtSecret, { complete: true }, (err:any, userInfo:any) => {
             return err ? unAuthorized(1) : authorise(userInfo.payload)
         });
     }
@@ -31,4 +31,11 @@ const  authenticate = (req:any, res:any, next:Function) => {
     const { token } = req.headers;
     return token ? tokenVerification(token) : unAuthorized(0);
   }
-export { authenticate };
+
+  const authenticateSupport = ( req:any, res:any, next:Function ) => {
+    console.log({originalUrl : req.originalUrl}) // '/admin/new?sort=desc'
+    console.log({baseUrl : req.baseUrl}) // '/admin'
+    console.log({path : req.path}) // '/new'
+    next()
+  }
+export { authenticate, authenticateSupport };

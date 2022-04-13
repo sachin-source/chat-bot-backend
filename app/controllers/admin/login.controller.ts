@@ -1,6 +1,6 @@
 var User = require("../../models/user")
 var jwt = require('jsonwebtoken');
-import { jwtSecret } from "../../config/constants.config"
+import { loginJwtSecret } from "../../config/constants.config"
 
 export default class adminLoginController {
 
@@ -14,7 +14,7 @@ export default class adminLoginController {
                 if (err || !matched) return res.status(401).send({ err: true, message: "Invalid password." });
 
                 const { username, privateKey, role, channelId } = user;
-                var adminToken = jwt.sign({ email, username, privateKey, role, channelId }, jwtSecret);
+                var adminToken = jwt.sign({ email, username, privateKey, role, channelId }, loginJwtSecret);
                 res.send({ adminToken, err: false, email, username, privateKey, role, channelId });
             });
         });

@@ -1,11 +1,13 @@
 var express = require('express');
 const app = express();
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const databaseUrl = 'mongodb://localhost:27017/chat';
-mongoose.connect(databaseUrl, { useUnifiedTopology: true, useNewUrlParser: true }, function (err:any) {
-    const status = err ? "Could not connect to chat database" : "Connected to chat database";
-    console.log(status)
-  });
+mongoose.connect(databaseUrl, { useUnifiedTopology: true, useNewUrlParser: true }, function (err: any) {
+  const status = err ? "Could not connect to chat database" : "Connected to chat database";
+  console.log(status)
+});
 
+app.use(bodyParser.json())
 export { app };

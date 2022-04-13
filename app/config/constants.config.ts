@@ -1,6 +1,7 @@
 const debuggerEnabled = false;
 const debuggerString = 'chat-backend:server';
-const jwtSecret = "mounaraaga";
+const loginJwtSecret = "mounaraaga";
+const supportJwtSecret = "supportMounaraaga"
 
 const generateRandomString = (length: number = 16) => {
     var result = '';
@@ -19,4 +20,4 @@ const generateUserId = () => {
     return generateRandomString(8) + (new Date().getTime()) + generateRandomString(3);
 }
 
-export { debuggerEnabled, debuggerString, jwtSecret, generateChannelKey, generateRandomString, generateUserId };
+export { debuggerEnabled, debuggerString, loginJwtSecret, supportJwtSecret, generateChannelKey, generateRandomString, generateUserId };
