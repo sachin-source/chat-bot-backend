@@ -7,10 +7,10 @@ const AdminLoginController = new adminLoginController()
 
 // /admin-api/login/
 router.route('/')
-    // .get(AdminLoginController.login);
-    .get(AdminLoginController.index);
+    .get(AdminLoginController.login);
+    // .get(AdminLoginController.index);
 
 // /admin-api/login/login
-router.route('/login')
-    .get(AdminLoginController.login);
+// router.route('/login')
+//     .get(AdminLoginController.login);
 module.exports = router;

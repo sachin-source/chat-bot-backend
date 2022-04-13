@@ -2,6 +2,7 @@ var express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors")
 
 const databaseUrl = 'mongodb://localhost:27017/chat';
 mongoose.connect(databaseUrl, { useUnifiedTopology: true, useNewUrlParser: true }, function (err: any) {
@@ -9,5 +10,6 @@ mongoose.connect(databaseUrl, { useUnifiedTopology: true, useNewUrlParser: true 
   console.log(status)
 });
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors())
 export { app };

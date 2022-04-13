@@ -12,5 +12,6 @@ router.use('/login', loginDefaultRoutes);
 router.use('/channel', adminChannelRoutes);
 router.use('/userId', adminUserIdRoutes);
 
+router.use('/*', adminDefaultRoutes);
 
 module.exports = router;

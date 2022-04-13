@@ -9,6 +9,8 @@
 <p id="demo"></p>
  
 <script>
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhY2hpbm1ndnRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzYWNoaW4iLCJwcml2YXRlS2V5IjoiZWFvZ1lpaFFvajRRTzB2biIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjQ5ODU2MjY5fQ.GhFzeyrAMBMg2npt6eo3Yn21e74-8UtskDCQrASqBGU";
+
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -16,8 +18,9 @@ function loadDoc() {
       document.getElementById("demo").innerHTML = this.responseText;
     }
   };
-  xhttp.open("POST", "http://localhost:3500", true);
+  xhttp.open("GET", "http://localhost:3500/admin-api/userId", true);
   xhttp.setRequestHeader("Content-type", "application/Json");
+  xhttp.setRequestHeader("token", token);
   xhttp.send();
 }
 </script>
