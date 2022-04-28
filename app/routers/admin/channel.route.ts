@@ -17,7 +17,4 @@ router.route('/:channelId')
 
 module.exports = router;
 
-
-
-
 router.param('channelId', AdminChannelController.getByChannelId);

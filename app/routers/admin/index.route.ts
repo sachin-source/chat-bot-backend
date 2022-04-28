@@ -3,6 +3,7 @@ const loginDefaultRoutes = require('./login.route')
 const adminChannelRoutes = require('./channel.route')
 const adminUserIdRoutes = require('./userId.route')
 const adminSupportRoutes = require('./support.route')
+const adminMessageRoutes = require('./message.route')
 
 var express = require('express');
 var router = express.Router();
@@ -13,6 +14,7 @@ router.use('/login', loginDefaultRoutes);
 router.use('/channel', adminChannelRoutes);
 router.use('/userId', adminUserIdRoutes);
 router.use('/support', adminSupportRoutes);
+router.use('/message', adminMessageRoutes);
 
 router.use('/*', adminDefaultRoutes);
 
@@ -28,13 +30,13 @@ module.exports = router;
  * admin logging in as support.
  * receiving messages from the queue and storing them.
  * publishing the stored messages to another queue ( saved messages queue ) to send other edge for response.
+ * listing the messages based on userId.
+ * listing the channels based on privateKey.
  */
 
 /**
  * Things to complete :
  * 
- * listing the messages based on userId.
- * listing the channels based on privateKey.
  * resolve - reopen functionality.
  * message format handling.
  * admin broadcasting.
