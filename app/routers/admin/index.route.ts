@@ -34,7 +34,7 @@ module.exports = router;
  * Things to complete :
  * 
  * listing the messages based on userId.
- * listing the channels based on privateKey
+ * listing the channels based on privateKey.
  * resolve - reopen functionality.
  * message format handling.
  * admin broadcasting.

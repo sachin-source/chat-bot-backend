@@ -11,15 +11,15 @@ export default class adminLoginController {
         const { password, email } = req.query;
         User.findOne({ email }, (err: any, user: any) => {
             User.comparePassword(password, user.password, (err: any, matched: any) => {
-                if (err || !matched) return res.status(401).send({ err: true, message: "Invalid password." });
+                if (err || !matched) return res.status(401).send({ status : false, message: "Invalid password." });
 
                 const { username, privateKey, role, channelId } = user;
                 if( role == "supportAgent" ){
                     var supportToken = jwt.sign({ email, username, privateKey, role, channelId }, supportJwtSecret);
-                    return res.send({ supportToken, status : "success", email, username, privateKey, role, channelId });
+                    return res.send({ supportToken, status : true, email, username, privateKey, role, channelId });
                 } else {
                     var adminToken = jwt.sign({ email, username, privateKey, role }, loginJwtSecret);
-                    return res.send({ adminToken, status : "success", email, username, privateKey, role, channelId });
+                    return res.send({ adminToken, status : true, email, username, privateKey, role, channelId });
                 }
             });
         });

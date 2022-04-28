@@ -14,7 +14,7 @@ const authenticate = (req: any, res: any, next: Function) => {
 
     const unAuthorized = (reason: number = 0) => {
         let message = reason ? "Token invalid." : "Missing authentication token.";
-        return res.status(401).send({ err: true, message, tokenInvalid: Boolean(reason) })
+        return res.status(401).send({ status: false, message, tokenInvalid: Boolean(reason) })
     }
 
     const authorise = (payload: any) => {
@@ -36,7 +36,7 @@ const authenticateSupport = (req: any, res: any, next: Function) => {
 
     const unAuthorized = (reason: number = 0) => {
         let message = reason ? "Token invalid." : "Missing authentication support token.";
-        return res.status(401).send({ err: true, message, tokenInvalid: Boolean(reason) })
+        return res.status(401).send({ status: false, message, tokenInvalid: Boolean(reason) })
     }
 
     const authorise = (payload: any) => {

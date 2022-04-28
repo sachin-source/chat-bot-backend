@@ -4,9 +4,8 @@ const User = require("../../models/user");
 const Channel = require("../../models/channel");
 const UserId = require("../../models/userId");
 
-import { generateUserId } from "../../config/constants.config";
+import { generateUserId, AUTH_SECRET } from "../../config/constants.config";
 
-const AUTH_SECRET = "shambhoShambhaviPriyah";
 
 export default class widgetAuthController {
     
@@ -22,8 +21,8 @@ export default class widgetAuthController {
             if(!err && isPrivateKeyExists) {
                 Channel.exists( { channelId }, (err: any, isChannelExists:boolean) => {
                     if(!err && isChannelExists) {
-                        const token = jwt.sign( { privateKey, channelId }, AUTH_SECRET );
                         const userId = generateUserId();
+                        const token = jwt.sign( { privateKey, channelId, userId }, AUTH_SECRET );
                         UserId.saveUserId({ userId, privateKey, channelId }, (err:any, savedUserInfo:any) => {
                             Boolean(err) ? res.status(500).send({ status : false, message : "error with the query"}) : res.send({ status : true, token, userId });
                         });
