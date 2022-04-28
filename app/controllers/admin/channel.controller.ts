@@ -38,12 +38,19 @@ export default class adminChannelController {
             res.send({ err: Boolean(err), channelData, message: Boolean(err) ? "Channel updation failed" : "Channel updation success" })
         });
     }
+
+    public getChannels = (req: any, res: any) => {
+        const { user: { privateKey } } = req;
+        Channel.getChannels({ params : { privateKey }, fetch : { _id : 1, channelId : 1, channelName : 1, description : 1, isActive : 1 }}, (err:any, channels:any[]) => {
+            return res.status(err ? 500 : 200).send({ status : !Boolean(err), channels, message : err ? "Error finding channels!" : "" });
+        })
+    }
 }
 
 /**
- * 
+ *
  * update the above data by channelId
- * 
+ *
  */
 
 // const returnedTarget = Object.assign(target, source);

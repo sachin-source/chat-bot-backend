@@ -34,11 +34,11 @@ ChannelSchema.statics = {
         const { channelName = '', description = '', privateKey = '', isActive, channelId } = inputs;
             this.updateOne({ channelId }, { $set : { channelName, description, privateKey, isActive }}, callback);
     },
-    getChannels : function({ params = {}, fetch = {}, skip = 0, limit = 50, sort = { } }) {
+    getChannels : function({ params = {}, fetch = {}, skip = 0, limit = 50, sort = { } }, callback:Function) {
         let sortBy = {};
         return this.find(params, fetch).sort(sortBy)
             .skip(+skip).limit(+limit)
-            .exec();
+            .exec(callback);
     }
 };
 

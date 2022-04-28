@@ -9,6 +9,7 @@ const AdminChannelController = new adminChannelController()
 router.route('/')
     .post(AdminChannelController.create)
     .put(AdminChannelController.updateChannel)
+    .get(AdminChannelController.getChannels)
 
 // /admin-api/channel/:id
 router.route('/:channelId')
