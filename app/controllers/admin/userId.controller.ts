@@ -8,7 +8,7 @@ const UserId = require("../../models/userId");
 
 export default class adminUserIdController {
     public getUserIds = (req:any, res:any) => {
-        const { channelId } = req.user;
+        const { channelId } = req.support;
         UserId.find({ isResolved : false, channelId }, (err:any, userIds:any[]) => {
             res.send({ err, userIds })
         })
