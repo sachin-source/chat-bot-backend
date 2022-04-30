@@ -37,9 +37,18 @@ module.exports = router;
 /**
  * Things to complete :
  * 
- * resolve - reopen functionality.
+ * resolve - reopen functionality for userids.
+ * channel enable and disable options
  * message format handling.
  * admin broadcasting.
  * endpoint for messages.
  * webhook intigration.
+ */
+
+/**
+ * @description frontend plan
+ * 
+ * 1. light and dark themes
+ * 2. PWA
+ * 3. colors as variables
  */
