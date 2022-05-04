@@ -28,8 +28,8 @@ const authenticate = (req: any, res: any, next: Function) => {
         });
     }
 
-    const { token } = req.headers;
-    return token ? tokenVerification(token) : unAuthorized(0);
+    const { adminToken } = req.headers;
+    return adminToken ? tokenVerification(adminToken) : unAuthorized(0);
 }
 
 const authenticateSupport = (req: any, res: any, next: Function) => {

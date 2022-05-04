@@ -22,9 +22,9 @@ export default class widgetAuthController {
                 Channel.exists( { channelId }, (err: any, isChannelExists:boolean) => {
                     if(!err && isChannelExists) {
                         const userId = generateUserId();
-                        const token = jwt.sign( { privateKey, channelId, userId }, AUTH_SECRET );
+                        const adminToken = jwt.sign( { privateKey, channelId, userId }, AUTH_SECRET );
                         UserId.saveUserId({ userId, privateKey, channelId }, (err:any, savedUserInfo:any) => {
-                            Boolean(err) ? res.status(500).send({ status : false, message : "error with the query"}) : res.send({ status : true, token, userId });
+                            Boolean(err) ? res.status(500).send({ status : false, message : "error with the query"}) : res.send({ status : true, adminToken, userId });
                         });
                     } else if ( !isChannelExists ) {
                         res.status(400).send({ status : false, message : "UnAuthenticated channelId" });

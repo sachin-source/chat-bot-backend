@@ -24,7 +24,7 @@ module.exports = router;
 /**
  * Things completed :
  * 
- * login and token generation.
+ * login and adminToken, supportToken generation.
  * channel creation.
  * listing the userids based on channel id.
  * admin logging in as support.
