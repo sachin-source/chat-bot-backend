@@ -10,7 +10,7 @@
  
 <script>
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhY2hpbm1ndnRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzYWNoaW4iLCJwcml2YXRlS2V5IjoiZWFvZ1lpaFFvajRRTzB2biIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjQ5ODU2MjY5fQ.GhFzeyrAMBMg2npt6eo3Yn21e74-8UtskDCQrASqBGU";
-
+// {"adminToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhY2hpbm1ndnRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzYWNoaW4iLCJwcml2YXRlS2V5IjoiZWFvZ1lpaFFvajRRTzB2biIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNjUyNTMxNDU0fQ.0UKGoGm7OGQLvSAy6h7hJmemDeeVhhnCVrl8O87TNrY","status":true,"email":"sachinmgvt@gmail.com","username":"sachin","privateKey":"eaogYihQoj4QO0vn","role":"superAdmin"}
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -20,7 +20,8 @@ function loadDoc() {
   };
   xhttp.open("GET", "http://localhost:3500/admin-api/userId", true);
   xhttp.setRequestHeader("Content-type", "application/Json");
-  xhttp.setRequestHeader("token", token);
+  xhttp.setRequestHeader("admintoken", token);
+  xhttp.setRequestHeader("supporttoken", token);
   xhttp.send();
 }
 </script>

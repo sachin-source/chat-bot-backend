@@ -13,7 +13,7 @@ export default class adminChannelController {
         const { user: { privateKey }, body: { channelName, isActive, description } } = req;
         Channel.createChannel({ privateKey, channelName, isActive, description }, (err: any, isChannelExists: boolean) => {
             let message = err ? "Channel not created. Please try again" : (isChannelExists ? "Channel with this name already exists." : "Channel created successfully.");
-            return res.send({ err, isChannelExists, message });
+            return res.send({ status : !Boolean(err), err, isChannelExists, message });
         });
     };
 
@@ -27,7 +27,7 @@ export default class adminChannelController {
 
     public getChannel = (req: any, res: any) => {
         const { err, channel } = req;
-        res.send({ err, channel });
+        res.send({ status : !Boolean(err), err, channel });
     }
 
     public updateChannel = (req: any, res: any) => {
@@ -35,7 +35,7 @@ export default class adminChannelController {
         const channelData = { ...channel, ...body };
         const { privateKey, channelName, isActive, description } = channelData;
         Channel.updateChannelByChannelId({ privateKey, channelName, isActive, description }, (err: any, updated: any) => {
-            res.send({ err: Boolean(err), channelData, message: Boolean(err) ? "Channel updation failed" : "Channel updation success" })
+            res.send({ status : !Boolean(err), err, channelData, message: Boolean(err) ? "Channel updation failed" : "Channel updation success" })
         });
     }
 

@@ -7,7 +7,7 @@ const authenticate = (req: any, res: any, next: Function) => {
     // console.log({baseUrl : req.baseUrl}) // '/admin'
     // console.log({path : req.path}) // '/new'
 
-    const nonSecurePaths = ['/login', '/about', '/contact'];
+    const nonSecurePaths = ['/login/login', '/about', '/contact'];
     if (nonSecurePaths.includes(req.path)) return next();
 
     // console.log( "nonSecure ? ", nonSecurePaths.includes(req.path))
@@ -28,29 +28,31 @@ const authenticate = (req: any, res: any, next: Function) => {
         });
     }
 
-    const { adminToken } = req.headers;
-    return adminToken ? tokenVerification(adminToken) : unAuthorized(0);
+    const { admintoken } = req.headers;
+    // console.log(req.path , req)
+    return admintoken ? tokenVerification(admintoken) : unAuthorized(0);
 }
 
 const authenticateSupport = (req: any, res: any, next: Function) => {
-
+    
     const unAuthorized = (reason: number = 0) => {
         let message = reason ? "Token invalid." : "Missing authentication support token.";
         return res.status(401).send({ status: false, message, tokenInvalid: Boolean(reason) })
     }
-
+    
     const authorise = (payload: any) => {
         req.support = payload;
         return next();
     }
-
+    
     const tokenVerification = (token: any) => {
         jwt.verify(token, supportJwtSecret, { complete: true }, (err: any, userInfo: any) => {
             return err ? unAuthorized(1) : authorise(userInfo.payload);
         });
     }
-
-    const { supportToken } = req.headers;
-    return supportToken ? tokenVerification(supportToken) : unAuthorized(0);
+    
+    const { supporttoken } = req.headers;
+    console.log(req.headers)
+    return supporttoken ? tokenVerification(supporttoken) : unAuthorized(0);
 }
 export { authenticate, authenticateSupport };

@@ -4,6 +4,7 @@ const adminChannelRoutes = require('./channel.route')
 const adminUserIdRoutes = require('./userId.route')
 const adminSupportRoutes = require('./support.route')
 const adminMessageRoutes = require('./message.route')
+const adminAuthRoutes = require('./auth.route')
 
 var express = require('express');
 var router = express.Router();
@@ -11,6 +12,7 @@ var router = express.Router();
 // /admin-api/
 router.use('/default', adminDefaultRoutes);
 router.use('/login', loginDefaultRoutes);
+router.use('/auth', adminAuthRoutes);
 router.use('/channel', adminChannelRoutes);
 router.use('/userId', adminUserIdRoutes);
 router.use('/support', adminSupportRoutes);
@@ -43,6 +45,7 @@ module.exports = router;
  * admin broadcasting.
  * endpoint for messages.
  * webhook intigration.
+ * Need to cache user information before authentication ( caching of unconformed data instead of storing directly on to the db )
  */
 
 /**

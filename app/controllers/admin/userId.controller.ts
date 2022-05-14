@@ -10,7 +10,7 @@ export default class adminUserIdController {
     public getUserIds = (req:any, res:any) => {
         const { channelId } = req.support;
         UserId.find({ isResolved : false, channelId }, (err:any, userIds:any[]) => {
-            res.send({ err, userIds })
+            res.send({ status : !Boolean(err), err, userIds })
         })
     }
 }
